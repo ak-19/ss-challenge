@@ -1,15 +1,22 @@
+import { Matrix } from "./Matrix";
+import { SingleCharFinder } from "./SingleCharFinder";
+
 export class FindLettersAndPath {
     private letters: string[];
     private path: string[];
-    constructor(private input: string[]) {
+    private a: Matrix;
+    private finder: SingleCharFinder;
+
+    constructor(input: string[]) {
         this.letters = [];
         this.path = [];
+        this.a = new Matrix(input);
+        this.finder = new SingleCharFinder('@');
     }
 
     process() {
-        if (this.input.length === 0) {
-            return;
-        }
+        this.finder.setChar('@');
+        this.finder.findOrThrow(this.a);
     }
 
     get() {

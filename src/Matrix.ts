@@ -13,6 +13,10 @@ export class Matrix {
         return this.m[row];
     }
 
+    getRowsLength() {
+        return this.m.length;
+    }
+
     visit(position: Position) {
         this.processed.add(position);
     }
