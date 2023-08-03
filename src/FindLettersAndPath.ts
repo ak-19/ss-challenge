@@ -14,9 +14,31 @@ export class FindLettersAndPath {
         this.finder = new SingleCharFinder('@');
     }
 
+    private findStart() {
+        try {
+            this.finder.setChar('@');
+            return this.finder.findOrThrow(this.a);
+        } catch (error: any) {
+            if (error.message === 'Not found') throw new Error('No starting point found');
+            if (error.message == 'Multiple found') throw new Error('Multiple starting points found');
+            throw error;
+        }
+    }
+
+    private findEnd() {
+        try {
+            this.finder.setChar('x');
+            return this.finder.findOrThrow(this.a);
+        } catch (error: any) {
+            if (error.message === 'Not found') throw new Error('No end point found');
+            if (error.message == 'Multiple found') throw new Error('Multiple ending points found');
+            throw error;
+        }
+    }
+
     process() {
-        this.finder.setChar('@');
-        this.finder.findOrThrow(this.a);
+        this.findStart();
+        this.findEnd();
     }
 
     get() {
