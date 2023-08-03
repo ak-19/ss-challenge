@@ -1,4 +1,4 @@
-import { Position } from "./positions/Position";
+import { Position } from "./Position";
 
 export class PositionSet {
     private set: Set<Position> = new Set<Position>();

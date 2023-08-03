@@ -1,4 +1,4 @@
-import { PositionSet } from "./PositionSet";
+import { PositionSet } from "./positions/PositionSet";
 import { Position } from "./positions/Position";
 
 export class Matrix {
