@@ -2,10 +2,12 @@ import { Position } from "./Position";
 import { Direction } from "./Direction";
 import { Matrix } from "../Matrix";
 import { StartPosition } from "./StartPosition";
+import { EndPosition } from "./EndPosition";
 
 export class PositionFactory {
     static create(row: number, col: number, direction: Direction, matrix: Matrix) {
         if (matrix.getCell(row, col) === '@') return new StartPosition(row, col, direction, matrix);
+        if (matrix.getCell(row, col) === 'x') return new EndPosition(row, col, direction, matrix);        
         return undefined;
     }
 
