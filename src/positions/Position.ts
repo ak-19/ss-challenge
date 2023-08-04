@@ -29,5 +29,9 @@ export abstract class Position {
 
     get char() { return this._char; }
 
+    protected definedUnvisited(position: Position | undefined): boolean {
+        return position && !position.visited;
+    }
+
     abstract next(): Position | undefined;
 }
