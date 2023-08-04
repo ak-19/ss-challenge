@@ -1,5 +1,6 @@
 import { Matrix } from "./Matrix";
 import { SingleCharFinder } from "./SingleCharFinder";
+import { Position } from "./positions/Position";
 
 export class FindLettersAndPath {
     private letters: string[];
@@ -36,9 +37,24 @@ export class FindLettersAndPath {
         }
     }
 
+    private notVisitedChar(position: Position): boolean {
+        return !position.visited && /[A-Z]/.test(position.char);
+    }
+
+    private visitAndMove(position: Position) {
+        position.visit();
+        return position.next();
+    }
+
     process() {
-        this.findStart();
+        let curr: Position = this.findStart();
         this.findEnd();
+
+        while (curr) {
+            this.path.push(curr.char);
+            if (this.notVisitedChar(curr)) this.letters.push(curr.char);
+            curr = this.visitAndMove(curr);
+        }
     }
 
     get() {
