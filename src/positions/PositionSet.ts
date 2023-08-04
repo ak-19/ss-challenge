@@ -12,7 +12,7 @@ export class PositionSet {
     }
 
     has(position: Position) {
-        for (let p of this.set) {
+        for (const p of this.set) {
             if (position.equals(p)) return true;
         }
         return false;
