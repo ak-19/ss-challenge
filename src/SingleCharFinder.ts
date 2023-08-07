@@ -6,8 +6,9 @@ import { PositionFactory } from "./positions/PositionFactory";
 export class SingleCharFinder {
     constructor(private char: string) { }
 
-    setChar(char: string) {
+    setChar(char: string): SingleCharFinder {
         this.char = char;
+        return this;
     }
 
     findOrThrow(a: Matrix) {
