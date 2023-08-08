@@ -16,7 +16,7 @@ export class PositionFactory {
         if (/[A-Z]/.test(matrix.getCell(row, col))) return new CharMovePosition(row, col, direction, matrix);
         if (matrix.getCell(row, col) === '+') return new TurnMovePosition(row, col, direction, matrix);
 
-        return undefined;
+        throw new Error('Unknown symbol type');
     }
 
     static createIfValid(row: number, col: number, direction: Direction, matrix: Matrix): Position | undefined {
