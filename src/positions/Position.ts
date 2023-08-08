@@ -29,6 +29,8 @@ export abstract class Position {
 
     get char() { return this._char; }
 
+    get Direction() { return this.direction; }
+
     protected definedUnvisited(position: Position | undefined): boolean {
         return position && !position.visited;
     }
