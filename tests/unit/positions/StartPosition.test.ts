@@ -1,16 +1,14 @@
 import { Matrix } from "../../../src/Matrix";
 import { SingleCharFinder } from "../../../src/SingleCharFinder";
-import { Direction } from "../../../src/positions/Direction";
+import { DIRECTIONS } from "../../../src/positions/Direction";
 import { RegularMovePosition } from "../../../src/positions/RegularMovePosition";
-import { StartPosition } from "../../../src/positions/StartPosition";
 
 describe('When start char on position (0,0) runs next', () => {
     const a = ['@--x'];
     const matrix = new Matrix(a);
     test('should return instance of RegularMovePosition with coordinates (0, 1)', () => {
         const startPosition = new SingleCharFinder(matrix).findStart();
-        const expectedNextPosition = new RegularMovePosition(0, 1, new Direction(0, 1), matrix);
-        expect(startPosition).toBeInstanceOf(StartPosition);
+        const expectedNextPosition = new RegularMovePosition(0, 1, DIRECTIONS.RIGHT, matrix);
         expect(startPosition.next().equals(expectedNextPosition)).toBeTruthy();
     });
 });
@@ -23,7 +21,6 @@ describe('When start char on position (0,0) runs next and there are mutiple path
     const matrix = new Matrix(a);
     test('should throw error Multiple paths found', () => {
         const startPosition = new SingleCharFinder(matrix).findStart();
-        expect(startPosition).toBeInstanceOf(StartPosition);
         expect(() => startPosition.next()).toThrowError('Multiple paths found');
     });
 });
@@ -37,7 +34,6 @@ describe('When start char on position (0,0) runs next and there are no paths', (
     const matrix = new Matrix(a);
     test('should throw error No path found', () => {
         const startPosition =new SingleCharFinder(matrix).findStart();
-        expect(startPosition).toBeInstanceOf(StartPosition);
         expect(() => startPosition.next()).toThrowError('No path found');
     });
 });
