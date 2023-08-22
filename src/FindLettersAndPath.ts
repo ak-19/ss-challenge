@@ -12,27 +12,7 @@ export class FindLettersAndPath {
         this.letters = [];
         this.path = [];
         this.matrix = new Matrix(input);
-        this.finder = new SingleCharFinder('@');
-    }
-
-    private findStart() {
-        try {
-            return this.finder.setChar('@').findOrThrow(this.matrix);
-        } catch (error: any) {
-            if (error.message === 'Not found') throw new Error('No starting point found');
-            if (error.message == 'Multiple found') throw new Error('Multiple starting points found');
-            throw error;
-        }
-    }
-
-    private findEnd() {
-        try {
-            return this.finder.setChar('x').findOrThrow(this.matrix);
-        } catch (error: any) {
-            if (error.message === 'Not found') throw new Error('No end point found');
-            if (error.message == 'Multiple found') throw new Error('Multiple ending points found');
-            throw error;
-        }
+        this.finder = new SingleCharFinder(this.matrix);
     }
 
     private notVisitedChar(position: Position): boolean {
@@ -45,8 +25,8 @@ export class FindLettersAndPath {
     }
 
     process() {
-        let curr: Position = this.findStart();
-        this.findEnd();
+        let curr: Position = this.finder.findStart();
+        this.finder.findEnd();
 
         while (curr) {
             this.path.push(curr.char);

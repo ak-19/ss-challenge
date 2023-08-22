@@ -1,7 +1,6 @@
-import { Direction } from "./Direction";
+import { DIRECTIONS } from "./Direction";
 import { Position } from "./Position";
 import { PositionFactory } from "./PositionFactory";
-
 
 export class TurnMovePosition extends Position {
 
@@ -14,32 +13,32 @@ export class TurnMovePosition extends Position {
 
     getLeftOrRightTurn(positions: Position[]) {
         const [row, col] = this.getCords();
-        const d = this.direction;
-        const left: Position | undefined = PositionFactory.createIfValid(row, col - 1, new Direction(0, -1), this.matrix);
-        const right: Position | undefined = PositionFactory.createIfValid(row, col + 1, new Direction(0, 1), this.matrix);
+        const direction = this.direction;
+        const left: Position | undefined = PositionFactory.createIfValid(row, col - 1, DIRECTIONS.LEFT, this.matrix);
+        const right: Position | undefined = PositionFactory.createIfValid(row, col + 1, DIRECTIONS.RIGHT, this.matrix);
         if (this.definedUnvisited(left)) positions.push(left)
         if (this.definedUnvisited(right)) positions.push(right)
 
         if (positions.length === 0) {
-            const leftLeft: Position | undefined = PositionFactory.createIfValid(row, col - 2 * d.dc, new Direction(0, -1), this.matrix);
+            const leftLeft: Position | undefined = PositionFactory.createIfValid(row, col - 2 * direction.dc, DIRECTIONS.LEFT, this.matrix);
             if (leftLeft && left) positions.push(left)
-            const rightRight: Position | undefined = PositionFactory.createIfValid(row, col + 2 * d.dc, new Direction(0, 1), this.matrix);
+            const rightRight: Position | undefined = PositionFactory.createIfValid(row, col + 2 * direction.dc, DIRECTIONS.RIGHT, this.matrix);
             if (rightRight && right) positions.push(right)
         }
     }
 
     getTopOrDownTurn(positions: Position[]) {
         const [row, col] = this.getCords();
-        const d = this.direction;
-        const up: Position | undefined = PositionFactory.createIfValid(row - 1, col, new Direction(-1, 0), this.matrix);
-        const down: Position | undefined = PositionFactory.createIfValid(row + 1, col, new Direction(1, 0), this.matrix);
+        const direction = this.direction;
+        const up: Position | undefined = PositionFactory.createIfValid(row - 1, col, DIRECTIONS.UP, this.matrix);
+        const down: Position | undefined = PositionFactory.createIfValid(row + 1, col, DIRECTIONS.DOWN, this.matrix);
         if (this.definedUnvisited(up)) positions.push(up)
         if (this.definedUnvisited(down)) positions.push(down)
 
         if (positions.length === 0) {
-            const upUp: Position | undefined = PositionFactory.createIfValid(row - 2 * d.dr, col, new Direction(-1, 0), this.matrix);
+            const upUp: Position | undefined = PositionFactory.createIfValid(row - 2 * direction.dr, col, DIRECTIONS.UP, this.matrix);
             if (upUp && up) positions.push(up)
-            const downDown: Position | undefined = PositionFactory.createIfValid(row + 2 * d.dr, col, new Direction(1, 0), this.matrix);
+            const downDown: Position | undefined = PositionFactory.createIfValid(row + 2 * direction.dr, col, DIRECTIONS.DOWN, this.matrix);
             if (downDown && down) positions.push(down)
         }
     }

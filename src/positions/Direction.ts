@@ -9,3 +9,12 @@ export class Direction {
         return 'UNKNOWN';
     }
 }
+
+// make enum for directions
+export const DIRECTIONS = {
+    RIGHT: new Direction(0, 1),
+    LEFT: new Direction(0, -1),
+    DOWN: new Direction(1, 0),
+    UP: new Direction(-1, 0),
+    UNKNOWN: new Direction(0, 0)
+};

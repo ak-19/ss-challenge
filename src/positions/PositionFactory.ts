@@ -6,6 +6,7 @@ import { EndPosition } from "./EndPosition";
 import { RegularMovePosition } from "./RegularMovePosition";
 import { CharMovePosition } from "./CharMovePosition";
 import { TurnMovePosition } from "./TurnMovePosition";
+import { UnknownSymbolError } from "../errors/UnknownSymbol";
 
 export class PositionFactory {
     static create(row: number, col: number, direction: Direction, matrix: Matrix) {
@@ -16,7 +17,7 @@ export class PositionFactory {
         if (/[A-Z]/.test(matrix.getCell(row, col))) return new CharMovePosition(row, col, direction, matrix);
         if (matrix.getCell(row, col) === '+') return new TurnMovePosition(row, col, direction, matrix);
 
-        throw new Error('Unknown symbol type');
+        throw new UnknownSymbolError();
     }
 
     static createIfValid(row: number, col: number, direction: Direction, matrix: Matrix): Position | undefined {

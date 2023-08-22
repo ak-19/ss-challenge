@@ -22,6 +22,6 @@ describe('Missing end character', () => {
     ];
 
     test(`should throw errror: 'No end point found'`, () => {
-        expect(() => new FindLettersAndPath(a).process()).toThrowError('No end point found');
+        expect(() => new FindLettersAndPath(a).process()).toThrowError('No ending point found');
     });
 });
